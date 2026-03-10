@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ─── TOKENS ─── */
+    :root {
+      --bg:       #f8f7f4;
+      --bg2:      #f0ede6;
+      --bg3:      #e8e4db;
+      --text:     #1a1916;
+      --text2:    #5a5750;
+      --muted:    #9e9a92;
+      --border:   #dedad2;
+      --ink:      #1a1916;
+      --hi:       #c8392b;        /* signature red */
+      --hi2:      #2563eb;        /* blue for links */
+      --hi-dim:   rgba(200,57,43,0.08);
+      --green:    #15803d;
+      --amber:    #b45309;
+      --purple:   #6d28d9;
+      --serif:    'Fraunces', Georgia, serif;
+      --sans:     'DM Sans', system-ui, sans-serif;
+      --mono:     'DM Mono', monospace;
+      --r:        6px;
+      --ease:     cubic-bezier(.4,0,.2,1);
+    }
+    [data-theme="dark"] {
+      --bg:       #111110;
+      --bg2:      #1a1917;
+      --bg3:      #252420;
+      --text:     #f5f3ef;
+      --text2:    #9e9a92;
+      --muted:    #5a5750;
+      --border:   #2a2925;
+      --hi:       #f87171;
+      --hi2:      #60a5fa;
+      --hi-dim:   rgba(248,113,113,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.7;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ─── PAGE GRID ─── */
+    .page {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      min-height: 100vh;
+    }
+
+    /* ══════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════ */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 2.5rem 2rem;
+    }
+    .sidebar::-webkit-scrollbar { width: 0; }
+
+    /* top mark */
+    .sb-mark {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--hi);
+      margin-bottom: 2rem;
+    }
+
+    /* avatar */
+    .avatar-ring {
+      position: relative;
+      width: 88px;
+      height: 88px;
+      margin-bottom: 1.4rem;
+    }
+    .avatar-ring::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(var(--hi) 0%, var(--hi2) 50%, var(--hi) 100%);
+      animation: spin 8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .avatar {
+      position: relative;
+      z-index: 1;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: var(--bg3);
+      border: 3px solid var(--bg2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .avatar svg { width: 40px; height: 40px; color: var(--muted); }
+
+    /* name block */
+    .sb-name {
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+    .sb-name em {
+      font-style: italic;
+      color: var(--hi);
+    }
+    .sb-role {
+      font-size: 0.8rem;
+      color: var(--text2);
+      margin-bottom: 0.2rem;
+    }
+    .sb-uni {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--hi2);
+      margin-bottom: 1.8rem;
+    }
+
+    /* tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 2rem;
+    }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: var(--bg3);
+      color: var(--text2);
+      border: 1px solid var(--border);
+      cursor: default;
+      transition: all 0.2s var(--ease);
+    }
+    .tag:hover { background: var(--hi-dim); color: var(--hi); border-color: var(--hi); }
+
+    /* nav */
+    .sb-nav { display: flex; flex-direction: column; gap: 1px; margin-bottom: 2rem; }
+    .sb-nav a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.55rem 0.8rem;
+      border-radius: var(--r);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text2);
+      text-decoration: none;
+      transition: all 0.18s var(--ease);
+      border: 1px solid transparent;
+    }
+    .sb-nav a .nav-arrow { opacity: 0; transform: translateX(-4px); transition: all 0.18s; font-size: 0.7rem; }
+    .sb-nav a:hover { background: var(--bg3); color: var(--text); border-color: var(--border); }
+    .sb-nav a:hover .nav-arrow { opacity: 1; transform: translateX(0); }
+    .sb-nav a.active { background: var(--hi-dim); color: var(--hi); border-color: rgba(200,57,43,0.2); font-weight: 500; }
+    .sb-nav a.active .nav-arrow { opacity: 1; transform: translateX(0); color: var(--hi); }
+
+    /* divider */
+    .sb-rule {
+      height: 1px;
+      background: var(--border);
+      margin: 0.5rem 0 1.2rem;
+    }
+
+    /* socials */
+    .socials { display: flex; flex-direction: column; gap: 2px; }
+    .socials a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.38rem 0.6rem;
+      border-radius: var(--r);
+      font-size: 0.8rem;
+      color: var(--text2);
+      text-decoration: none;
+      transition: all 0.18s var(--ease);
+    }
+    .socials a svg { width: 13px; height: 13px; flex-shrink: 0; }
+    .socials a:hover { background: var(--bg3); color: var(--hi2); }
+
+    /* theme + email */
+    .sb-bottom { margin-top: auto; padding-top: 1.5rem; }
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.42rem 0.7rem;
+      border-radius: var(--r);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text2);
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.18s var(--ease);
+      margin-bottom: 0.8rem;
+    }
+    .theme-toggle:hover { background: var(--bg3); color: var(--text); }
+    .theme-toggle svg { width: 13px; height: 13px; }
+    .sb-email {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      word-break: break-all;
+    }
+
+    /* ══════════════════════════════════
+       MAIN
+    ══════════════════════════════════ */
+    main {
+      padding: 3.5rem 5rem 7rem;
+      max-width: 800px;
+    }
+
+    /* section */
+    .sec {
+      margin-bottom: 5rem;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+    }
+    .sec.visible { opacity: 1; transform: translateY(0); }
+
+    /* section header */
+    .sec-label {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    .sec-label-num {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--hi);
+      letter-spacing: 0.14em;
+    }
+    .sec-label-title {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    .sec-label-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .about-stat {
+      background: var(--bg);
+      padding: 1.2rem 1.5rem;
+      transition: background 0.2s;
+    }
+    .about-stat:hover { background: var(--hi-dim); }
+    .stat-val {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--hi);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .stat-key {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .about-body { font-size: 0.93rem; color: var(--text2); line-height: 1.85; }
+    .about-body p { margin-bottom: 1rem; }
+    .about-body strong { color: var(--text); font-weight: 500; }
+    .about-body a { color: var(--hi2); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+    .about-body a:hover { border-color: var(--hi2); }
+    .quote-block {
+      margin: 1.8rem 0;
+      padding: 1.1rem 1.4rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--hi);
+      border-radius: 0 var(--r) var(--r) 0;
+    }
+    .quote-block p {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.6;
+    }
+    .cv-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.2rem;
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: var(--r);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: all 0.2s var(--ease);
+      margin-top: 1.2rem;
+    }
+    [data-theme="dark"] .cv-link { background: var(--text); color: var(--bg); }
+    .cv-link:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+    .cv-link svg { width: 13px; height: 13px; }
+
+    /* ── NEWS ── */
+    .news-list { display: flex; flex-direction: column; }
+    .news-item {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: 1.5rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+      transition: background 0.15s;
+    }
+    .news-item:last-child { border-bottom: none; }
+    .news-date {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--hi);
+      letter-spacing: 0.06em;
+      padding-top: 0.15rem;
+      white-space: nowrap;
+    }
+    .news-body { font-size: 0.87rem; color: var(--text2); line-height: 1.6; }
+    .news-body a { color: var(--hi2); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+    .news-body a:hover { border-color: var(--hi2); }
+    .pill {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.12rem 0.45rem;
+      border-radius: 999px;
+      margin-right: 0.4rem;
+      font-style: normal;
+      vertical-align: middle;
+    }
+    .pill-paper  { background: #dcfce7; color: #166534; }
+    .pill-talk   { background: #fef9c3; color: #854d0e; }
+    .pill-award  { background: #fce7f3; color: #9d174d; }
+    [data-theme="dark"] .pill-paper  { background: #14532d; color: #86efac; }
+    [data-theme="dark"] .pill-talk   { background: #422006; color: #fde68a; }
+    [data-theme="dark"] .pill-award  { background: #500724; color: #f9a8d4; }
+
+    /* ── PUBLICATIONS ── */
+    .pub-filter {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.8rem;
+    }
+    .flt {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.18s var(--ease);
+    }
+    .flt:hover { border-color: var(--text2); color: var(--text2); }
+    .flt.on { background: var(--hi); color: #fff; border-color: var(--hi); }
+
+    .pub-cards { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+    .pub-card {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0;
+      background: var(--bg);
+      transition: background 0.18s;
+    }
+    .pub-card:hover { background: var(--bg2); }
+    .pub-card[data-hidden="true"] { display: none; }
+    .pub-thumb {
+      width: 120px;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      min-height: 100px;
+    }
+    .pub-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .pub-thumb svg { width: 24px; height: 24px; color: var(--border); }
+    .pub-info { padding: 1.2rem 1.4rem; }
+    .venue-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .vc { background: var(--hi2); }
+    .va { background: var(--amber); }
+    .vw { background: var(--purple); }
+    .pub-title {
+      font-family: var(--serif);
+      font-size: 0.97rem;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.45;
+      margin-bottom: 0.35rem;
+    }
+    .pub-authors {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.65rem;
+      line-height: 1.5;
+    }
+    .pub-authors strong { color: var(--text2); font-weight: 500; }
+    .pub-btns { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+    .pb {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.04em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      color: var(--text2);
+      text-decoration: none;
+      background: var(--bg3);
+      transition: all 0.15s var(--ease);
+    }
+    .pb:hover { background: var(--hi2); color: #fff; border-color: var(--hi2); }
+
+    /* ── EXPERIENCE ── */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-card {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 1.5rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      transition: background 0.15s;
+    }
+    .exp-card:first-child { padding-top: 0; }
+    .exp-card:last-child { border-bottom: none; }
+    .exp-period {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      padding-top: 0.2rem;
+      line-height: 1.5;
+    }
+    .exp-content {}
+    .exp-role { font-weight: 500; font-size: 0.92rem; color: var(--text); margin-bottom: 0.15rem; }
+    .exp-where { font-size: 0.83rem; color: var(--hi2); margin-bottom: 0.25rem; }
+    .exp-where a { color: inherit; text-decoration: none; }
+    .exp-desc { font-size: 0.81rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── MISC ── */
+    .misc-body { font-size: 0.92rem; color: var(--text2); line-height: 1.85; }
+    .misc-body p { margin-bottom: 0.9rem; }
+    .misc-body a { color: var(--hi2); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+    .misc-body a:hover { border-color: var(--hi2); }
+
+    /* footer */
+    footer {
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .page { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 1.5rem;
+      }
+      .sb-nav { flex-direction: row; flex-wrap: wrap; }
+      .sb-bottom { margin-top: 1rem; padding-top: 1rem; }
+      main { padding: 2rem 1.5rem 4rem; max-width: 100%; }
+      .pub-card { grid-template-columns: 1fr; }
+      .pub-thumb { width: 100%; height: 120px; }
+      .about-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ─────────── SIDEBAR ─────────── -->
+  <aside class="sidebar">
+    <div class="sb-mark">Researcher · 2026</div>
+
+    <div class="avatar-ring">
+      <div class="avatar">
+        <!-- Replace with: <img src="images/photo.jpg" alt="Your Name"> -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="sb-name">Your <em>Name</em></div>
+    <div class="sb-role">M.S. Student · Computer Science</div>
+    <div class="sb-uni">Your University</div>
+
+    <div class="tags">
+      <span class="tag">3D Perception</span>
+      <span class="tag">Test-Time Adaptation</span>
+      <span class="tag">LiDAR</span>
+      <span class="tag">Domain Adaptation</span>
+      <span class="tag">Autonomous Driving</span>
+    </div>
+
+    <nav class="sb-nav">
+      <a href="#about">About <span class="nav-arrow">→</span></a>
+      <a href="#news">News <span class="nav-arrow">→</span></a>
+      <a href="#publications">Publications <span class="nav-arrow">→</span></a>
+      <a href="#experience">Experience <span class="nav-arrow">→</span></a>
+      <a href="#misc">Misc <span class="nav-arrow">→</span></a>
+    </nav>
+
+    <div class="sb-rule"></div>
+
+    <div class="socials">
+      <a href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+      <a href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Google Scholar
+      </a>
+      <a href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        CV / Resume
+      </a>
+    </div>
+
+    <div class="sb-bottom">
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="t-icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span id="t-label">Dark mode</span>
+      </button>
+      <div class="sb-email">yourname@university.edu</div>
+    </div>
+  </aside>
+
+  <!-- ─────────── MAIN ─────────── -->
+  <main>
+
+    <!-- ABOUT -->
+    <section class="sec" id="about">
+      <div class="sec-label">
+        <span class="sec-label-num">01</span>
+        <h2 class="sec-label-title">About</h2>
+        <div class="sec-label-line"></div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-stat">
+          <div class="stat-val">X</div>
+          <div class="stat-key">papers published</div>
+        </div>
+        <div class="about-stat">
+          <div class="stat-val">X+</div>
+          <div class="stat-key">citations</div>
+        </div>
+        <div class="about-stat">
+          <div class="stat-val">X</div>
+          <div class="stat-key">years of research</div>
+        </div>
+        <div class="about-stat">
+          <div class="stat-val">X</div>
+          <div class="stat-key">internships</div>
+        </div>
+      </div>
+
+      <div class="about-body">
+        <p>Hello! I am a [year] M.S./Ph.D. student in <strong>Computer Science</strong> at <strong>Your University</strong>, advised by Prof. <a href="#">Advisor Name</a>. My research focuses on <strong>[research area 1]</strong> and <strong>[research area 2]</strong>.</p>
+        <p>Before [University], I [previous background — e.g., worked at X as a researcher / completed my B.S. in Y]. I am especially passionate about [motivation or problem statement].</p>
+        <div class="quote-block">
+          <p>"Your research vision or a memorable quote that captures how you think."</p>
+        </div>
+        <p style="font-size:0.83rem;color:var(--muted)">📌 Actively looking for <strong style="color:var(--hi)">Ph.D. opportunities</strong> starting Fall 2026.</p>
+        <a href="#" class="cv-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download CV
+        </a>
+      </div>
+    </section>
+
+    <!-- NEWS -->
+    <section class="sec" id="news">
+      <div class="sec-label">
+        <span class="sec-label-num">02</span>
+        <h2 class="sec-label-title">News</h2>
+        <div class="sec-label-line"></div>
+      </div>
+      <div class="news-list">
+        <div class="news-item">
+          <span class="news-date">Mar. 2026</span>
+          <span class="news-body"><em class="pill pill-talk">Talk</em> Invited talk at [Institution/Conference]. Topic: [Title].</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">Jan. 2026</span>
+          <span class="news-body"><em class="pill pill-paper">Paper</em> 1 paper accepted at <a href="#">CVPR 2026</a>! Check out the <a href="#">project page</a>.</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">Sep. 2025</span>
+          <span class="news-body">Started M.S./Ph.D. at <strong>Your University</strong>, joined <a href="#">Lab Name</a>.</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">Jun. 2025</span>
+          <span class="news-body"><em class="pill pill-award">Award</em> Received [Fellowship / Scholarship name].</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">Mar. 2025</span>
+          <span class="news-body"><em class="pill pill-paper">Paper</em> Preprint on <a href="#">arXiv</a>: [one-line description].</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section class="sec" id="publications">
+      <div class="sec-label">
+        <span class="sec-label-num">03</span>
+        <h2 class="sec-label-title">Publications</h2>
+        <div class="sec-label-line"></div>
+      </div>
+
+      <div class="pub-filter">
+        <button class="flt on"  onclick="fp(this,'all')">All</button>
+        <button class="flt"     onclick="fp(this,'conf')">Conference</button>
+        <button class="flt"     onclick="fp(this,'arxiv')">arXiv</button>
+        <button class="flt"     onclick="fp(this,'ws')">Workshop</button>
+      </div>
+
+      <div class="pub-cards">
+        <div class="pub-card" data-type="conf">
+          <div class="pub-thumb">
+            <!-- <img src="images/pub1.png"> -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          </div>
+          <div class="pub-info">
+            <span class="venue-tag vc">CVPR 2026</span>
+            <div class="pub-title">Your Paper Title: A Descriptive Subtitle That Explains the Main Contribution</div>
+            <div class="pub-authors"><strong>Your Name</strong>, Co-Author One, Co-Author Two, Advisor Name</div>
+            <div class="pub-btns">
+              <a href="#" class="pb">arXiv</a>
+              <a href="#" class="pb">Code</a>
+              <a href="#" class="pb">Project Page</a>
+            </div>
+          </div>
+        </div>
+        <div class="pub-card" data-type="arxiv">
+          <div class="pub-thumb">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          </div>
+          <div class="pub-info">
+            <span class="venue-tag va">arXiv 2025</span>
+            <div class="pub-title">Rethinking BatchNorm Statistics for Robust Continual Test-Time Adaptation in LiDAR Semantic Segmentation</div>
+            <div class="pub-authors"><strong>Your Name</strong>, Co-Author One, Advisor Name</div>
+            <div class="pub-btns">
+              <a href="#" class="pb">arXiv</a>
+              <a href="#" class="pb">Code</a>
+              <a href="#" class="pb">Project Page</a>
+            </div>
+          </div>
+        </div>
+        <div class="pub-card" data-type="ws">
+          <div class="pub-thumb">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          </div>
+          <div class="pub-info">
+            <span class="venue-tag vw">NeurIPS Workshop 2024</span>
+            <div class="pub-title">Workshop Paper Title: Short Description of the Contribution</div>
+            <div class="pub-authors"><strong>Your Name</strong>, Co-Author, Advisor Name</div>
+            <div class="pub-btns">
+              <a href="#" class="pb">PDF</a>
+              <a href="#" class="pb">Poster</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="sec" id="experience">
+      <div class="sec-label">
+        <span class="sec-label-num">04</span>
+        <h2 class="sec-label-title">Experience</h2>
+        <div class="sec-label-line"></div>
+      </div>
+      <div class="exp-list">
+        <div class="exp-card">
+          <div class="exp-period">2024 –<br>Present</div>
+          <div class="exp-content">
+            <div class="exp-role">M.S. in Computer Science</div>
+            <div class="exp-where"><a href="#">Your University</a> &nbsp;·&nbsp; Advisor: Prof. Advisor Name</div>
+            <div class="exp-desc">Research on [topic]. Member of [Lab Name].</div>
+          </div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-period">2023 –<br>2024</div>
+          <div class="exp-content">
+            <div class="exp-role">Research Intern / AI Researcher</div>
+            <div class="exp-where"><a href="#">Company or Lab Name</a></div>
+            <div class="exp-desc">Brief description of the project and your contribution.</div>
+          </div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-period">2019 –<br>2023</div>
+          <div class="exp-content">
+            <div class="exp-role">B.S. in [Major]</div>
+            <div class="exp-where"><a href="#">Undergraduate University</a></div>
+            <div class="exp-desc">Minor in [Minor]. GPA: X.XX / 4.0.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MISC -->
+    <section class="sec" id="misc">
+      <div class="sec-label">
+        <span class="sec-label-num">05</span>
+        <h2 class="sec-label-title">Misc</h2>
+        <div class="sec-label-line"></div>
+      </div>
+      <div class="misc-body">
+        <p>Outside of research, I enjoy [hobby 1], [hobby 2], and [hobby 3]. [One memorable personal detail].</p>
+        <p>I believe [something you care about — e.g., good research comes from genuine curiosity].</p>
+        <p>Always happy to chat — reach me at <a href="mailto:yourname@university.edu">yourname@university.edu</a>.</p>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 Your Name</span>
+      <span>Built with HTML · GitHub Pages</span>
+    </footer>
+  </main>
+
+</div>
+<script>
+  /* theme */
+  const html = document.documentElement;
+  const theme = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', theme);
+  syncBtn(theme);
+
+  function toggleTheme() {
+    const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    syncBtn(next);
+  }
+  function syncBtn(t) {
+    document.getElementById('t-icon').innerHTML = t === 'dark'
+      ? '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>'
+      : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+    document.getElementById('t-label').textContent = t === 'dark' ? 'Light mode' : 'Dark mode';
+  }
+
+  /* pub filter */
+  function fp(btn, type) {
+    document.querySelectorAll('.flt').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    document.querySelectorAll('.pub-card').forEach(c => {
+      c.setAttribute('data-hidden', (type === 'all' || c.dataset.type === type) ? 'false' : 'true');
+    });
+  }
+
+  /* scroll fade */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.04 });
+  document.querySelectorAll('.sec').forEach(el => io.observe(el));
+
+  /* active nav */
+  const secs = [...document.querySelectorAll('section[id]')];
+  const links = [...document.querySelectorAll('.sb-nav a')];
+  window.addEventListener('scroll', () => {
+    const cur = secs.reduce((a, s) => window.scrollY >= s.offsetTop - 160 ? s.id : a, secs[0].id);
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+  }, { passive: true });
+</script>
+</body>
+</html>
