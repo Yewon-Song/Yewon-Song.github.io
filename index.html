@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Name</title>
+  <title>Yewon Song</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -177,37 +177,8 @@
       height: 8em;
       margin: 0 auto 2.25em auto;
     }
-    .avatar-ring::before {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      background: conic-gradient(
-        var(--hi) 0%,
-        var(--purple) 25%,
-        var(--hi2) 50%,
-        var(--purple) 75%,
-        var(--hi) 100%
-      );
-      animation: spin 6s linear infinite;
-    }
-    .avatar-ring::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      background: conic-gradient(
-        var(--hi) 0%,
-        var(--purple) 25%,
-        var(--hi2) 50%,
-        var(--purple) 75%,
-        var(--hi) 100%
-      );
-      animation: spin 6s linear infinite;
-      filter: blur(12px);
-      opacity: 0.4;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    .avatar-ring::before,
+    .avatar-ring::after { display: none; }
     .avatar {
       position: relative;
       z-index: 1;
@@ -947,17 +918,15 @@
 
   <!-- ─────────── SIDEBAR ─────────── -->
   <aside class="sidebar">
-    <div class="sb-mark">Researcher · 2026</div>
-
     <div class="avatar-ring">
       <div class="avatar">
         <img src="images/0318.jpg" alt="Profile Photo">
       </div>
     </div>
 
-    <div class="sb-name">Your <em>Name</em></div>
-    <div class="sb-role">M.S. Student · Computer Science</div>
-    <div class="sb-uni">Your University</div>
+    <div class="sb-name">Yewon <em>Song</em></div>
+    <div class="sb-role">M.S. Student · Automotive Engineering</div>
+    <div class="sb-uni">Hanyang University</div>
 
     <div class="tags">
       <span class="tag">3D Perception</span>
@@ -996,7 +965,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         </a>
       </div>
-      <div class="sb-email">yourname@university.edu</div>
+      <div class="sb-email">yewonsong@hanyang.ac.kr</div>
     </div>
   </aside>
 
@@ -1031,12 +1000,8 @@
       </div> -->
 
       <div class="about-body">
-        <p>Hello! I am a [year] M.S./Ph.D. student in <strong>Computer Science</strong> at <strong>Hanyang University</strong>, advised by Prof. <a href="#">Soonmin Hwang</a>. My research focuses on <strong>[research area 1]</strong> and <strong>[research area 2]</strong>.</p>
-        <p>Before [University], I [previous background — e.g., worked at X as a researcher / completed my B.S. in Y]. I am especially passionate about [motivation or problem statement].</p>
-        <div class="quote-block">
-          <p>"Your research vision or a memorable quote that captures how you think."</p>
-        </div>
-        <p style="font-size:0.83rem;color:var(--muted)">Actively looking for <strong style="color:var(--hi)">Ph.D. opportunities</strong> starting Fall 2026.</p>
+        <p>Hello! I am a first-year M.S. student in <strong>Automotive Engineering</strong> at <strong>Hanyang University</strong>, advised by Prof. <a href="#">Soonmin Hwang</a> at <a href="#">IRCV Lab</a>. My research focuses on <strong>LiDAR semantic segmentation</strong> and <strong>test-time adaptation</strong> for autonomous driving.</p>
+        <p>Before Hanyang University, I completed my B.S. in <strong>Electrical and Electronic Engineering</strong> at <strong>Konkuk University</strong> (2020 – 2025). I also gained industry experience as an AI Research Intern at <strong>SkyAutoNet</strong> and <strong>DCVL</strong>.</p>
         <a href="#" class="cv-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span>Download CV</span>
@@ -1053,24 +1018,24 @@
       </div>
       <div class="news-list">
         <div class="news-item">
-          <span class="news-date">Mar. 2026</span>
-          <span class="news-body"><em class="pill pill-talk">Talk</em> Invited talk at [Institution/Conference]. Topic: [Title].</span>
+          <span class="news-date">2026</span>
+          <span class="news-body"><em class="pill pill-paper">Paper</em> 1 paper accepted at <strong>ICAIIC 2026</strong>: Geometry-aware test-time adaptation for LiDAR segmentation.</span>
         </div>
         <div class="news-item">
-          <span class="news-date">Jan. 2026</span>
-          <span class="news-body"><em class="pill pill-paper">Paper</em> 1 paper accepted at <a href="#">CVPR 2026</a>! Check out the <a href="#">project page</a>.</span>
-        </div>
-        <div class="news-item">
-          <span class="news-date">Sep. 2025</span>
-          <span class="news-body">Started M.S./Ph.D. at <strong>Your University</strong>, joined <a href="#">Lab Name</a>.</span>
-        </div>
-        <div class="news-item">
-          <span class="news-date">Jun. 2025</span>
-          <span class="news-body"><em class="pill pill-award">Award</em> Received [Fellowship / Scholarship name].</span>
+          <span class="news-date">2025</span>
+          <span class="news-body"><em class="pill pill-paper">Paper</em> 2 papers published at <strong>KSAE Fall Conference 2025</strong> and <strong>ICTC 2025</strong>.</span>
         </div>
         <div class="news-item">
           <span class="news-date">Mar. 2025</span>
-          <span class="news-body"><em class="pill pill-paper">Paper</em> Preprint on <a href="#">arXiv</a>: [one-line description].</span>
+          <span class="news-body">Started M.S. at <strong>Hanyang University</strong>, joined <a href="#">IRCV Lab</a>.</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2023</span>
+          <span class="news-body"><em class="pill pill-award">Award</em> Grand Prize at International Collegiate EV Autonomous Driving Contest (Ministry of Transportation Research Director's Award).</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2022</span>
+          <span class="news-body"><em class="pill pill-award">Award</em> 1st Prize at Konkuk Univ AI Worker Hackathon.</span>
         </div>
       </div>
     </section>
@@ -1083,56 +1048,43 @@
         <div class="sec-label-line"></div>
       </div>
 
-      <div class="pub-filter">
-        <button class="flt on"  onclick="fp(this,'all')">All</button>
-        <button class="flt"     onclick="fp(this,'conf')">Conference</button>
-        <button class="flt"     onclick="fp(this,'arxiv')">arXiv</button>
-        <button class="flt"     onclick="fp(this,'ws')">Workshop</button>
-      </div>
-
       <div class="pub-cards">
         <div class="pub-card" data-type="conf">
           <div class="pub-thumb">
-            <!-- <img src="images/pub1.png"> -->
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
           </div>
           <div class="pub-info">
-            <span class="venue-tag vc">CVPR 2026</span>
-            <div class="pub-title">Your Paper Title: A Descriptive Subtitle That Explains the Main Contribution</div>
-            <div class="pub-authors"><strong>Your Name</strong>, Co-Author One, Co-Author Two, Advisor Name</div>
+            <span class="venue-tag vc">ICAIIC 2026</span>
+            <div class="pub-title">Seeing the Unseen: Geometry-Aware Test-Time Adaptation for LiDAR Segmentation</div>
+            <div class="pub-authors"><strong>Yewon Song*</strong>, Soonmin Hwang&dagger;</div>
             <div class="pub-btns">
-              <a href="#" class="pb">arXiv</a>
-              <a href="#" class="pb">Code</a>
-              <a href="#" class="pb">Project Page</a>
+              <a href="#" class="pb">Paper</a>
             </div>
           </div>
         </div>
-        <div class="pub-card" data-type="arxiv">
+        <div class="pub-card" data-type="conf">
           <div class="pub-thumb">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
           </div>
           <div class="pub-info">
-            <span class="venue-tag va">arXiv 2025</span>
-            <div class="pub-title">Rethinking BatchNorm Statistics for Robust Continual Test-Time Adaptation in LiDAR Semantic Segmentation</div>
-            <div class="pub-authors"><strong>Your Name</strong>, Co-Author One, Advisor Name</div>
+            <span class="venue-tag vc">KSAE Fall 2025</span>
+            <div class="pub-title">Occlusion-Aware Pseudo Label Generation for LiDAR Semantic Segmentation via Z-Buffer-Guided 2D-to-3D Label Transfer</div>
+            <div class="pub-authors">Sumin Lee*, <strong>Yewon Song</strong>, and Soonmin Hwang&dagger;</div>
             <div class="pub-btns">
-              <a href="#" class="pb">arXiv</a>
-              <a href="#" class="pb">Code</a>
-              <a href="#" class="pb">Project Page</a>
+              <a href="#" class="pb">Paper</a>
             </div>
           </div>
         </div>
-        <div class="pub-card" data-type="ws">
+        <div class="pub-card" data-type="conf">
           <div class="pub-thumb">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
           </div>
           <div class="pub-info">
-            <span class="venue-tag vw">NeurIPS Workshop 2024</span>
-            <div class="pub-title">Workshop Paper Title: Short Description of the Contribution</div>
-            <div class="pub-authors"><strong>Your Name</strong>, Co-Author, Advisor Name</div>
+            <span class="venue-tag vc">ICTC 2025</span>
+            <div class="pub-title">Understanding Cross-Domain Robustness in LiDAR Semantic Segmentation</div>
+            <div class="pub-authors"><strong>Yewon Song*</strong>, Sumin Lee, and Soonmin Hwang&dagger;</div>
             <div class="pub-btns">
-              <a href="#" class="pb">PDF</a>
-              <a href="#" class="pb">Poster</a>
+              <a href="#" class="pb">Paper</a>
             </div>
           </div>
         </div>
@@ -1148,27 +1100,32 @@
       </div>
       <div class="exp-list">
         <div class="exp-card">
-          <div class="exp-period">2024 –<br>Present</div>
+          <div class="exp-period">2025. 3. –<br>Present</div>
           <div class="exp-content">
-            <div class="exp-role">M.S. in Computer Science</div>
-            <div class="exp-where"><a href="#">Your University</a> &nbsp;·&nbsp; Advisor: Prof. Advisor Name</div>
-            <div class="exp-desc">Research on [topic]. Member of [Lab Name].</div>
+            <div class="exp-role">M.S. in Automotive Engineering</div>
+            <div class="exp-where"><a href="#">Hanyang University</a> &nbsp;·&nbsp; Advisor: Prof. Soonmin Hwang</div>
+            <div class="exp-desc">Research on LiDAR semantic segmentation and test-time adaptation. Member of IRCV Lab.</div>
           </div>
         </div>
         <div class="exp-card">
-          <div class="exp-period">2023 –<br>2024</div>
+          <div class="exp-period">2024. 3. –<br>2024. 7.</div>
           <div class="exp-content">
-            <div class="exp-role">Research Intern / AI Researcher</div>
-            <div class="exp-where"><a href="#">Company or Lab Name</a></div>
-            <div class="exp-desc">Brief description of the project and your contribution.</div>
+            <div class="exp-role">AI Research Intern</div>
+            <div class="exp-where"><a href="#">SkyAutoNet</a> &nbsp;·&nbsp; Autonomous Driving Platform Team</div>
           </div>
         </div>
         <div class="exp-card">
-          <div class="exp-period">2019 –<br>2023</div>
+          <div class="exp-period">2023. 6. –<br>2023. 12.</div>
           <div class="exp-content">
-            <div class="exp-role">B.S. in [Major]</div>
-            <div class="exp-where"><a href="#">Undergraduate University</a></div>
-            <div class="exp-desc">Minor in [Minor]. GPA: X.XX / 4.0.</div>
+            <div class="exp-role">AI Research Intern</div>
+            <div class="exp-where"><a href="#">DCVL</a></div>
+          </div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-period">2020. 3. –<br>2025. 2.</div>
+          <div class="exp-content">
+            <div class="exp-role">B.S. in Electrical and Electronic Engineering</div>
+            <div class="exp-where"><a href="#">Konkuk University</a></div>
           </div>
         </div>
       </div>
@@ -1182,14 +1139,16 @@
         <div class="sec-label-line"></div>
       </div>
       <div class="misc-body">
-        <p>Outside of research, I enjoy [hobby 1], [hobby 2], and [hobby 3]. [One memorable personal detail].</p>
-        <p>I believe [something you care about — e.g., good research comes from genuine curiosity].</p>
-        <p>Always happy to chat — reach me at <a href="mailto:yourname@university.edu">yourname@university.edu</a>.</p>
+        <p><strong>Awards</strong></p>
+        <p>Grand Prize, 2023 International Collegiate EV Autonomous Driving Contest (Ministry of Transportation Research Director's Award)</p>
+        <p>3rd Prize, 2023 KSAE Smart E-mobility Competition</p>
+        <p>3rd Prize, 2022 International Collegiate EV Autonomous Driving Contest</p>
+        <p>1st Prize, 2022 Konkuk Univ AI Worker Hackathon</p>
       </div>
     </section>
 
     <footer>
-      <span>&copy; 2026 Your Name</span>
+      <span>&copy; 2026 Yewon Song</span>
       <span>Built with HTML · GitHub Pages</span>
     </footer>
   </main>
