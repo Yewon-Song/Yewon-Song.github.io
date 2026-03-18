@@ -114,7 +114,7 @@
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 23em;
+      grid-template-columns: 3fr 1fr;
       min-height: 100vh;
     }
 
@@ -134,7 +134,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      font-size: 16pt;
+      font-size: clamp(11pt, 1.1vw, 16pt);
       padding: 3em;
       z-index: 10;
     }
@@ -872,16 +872,10 @@
     }
 
     /* ── RESPONSIVE ── */
-    /* xlarge: shrink sidebar */
-    @media (max-width: 1680px) {
-      .sidebar { font-size: 13pt; }
-    }
-    /* large: shrink more */
     @media (max-width: 1280px) {
-      .sidebar { font-size: 11pt; }
       main { padding: 3rem 3rem 5rem; }
     }
-    /* medium: collapse sidebar to top */
+    /* collapse sidebar to top */
     @media (max-width: 1024px) {
       .page { grid-template-columns: 1fr; }
       .sidebar {
