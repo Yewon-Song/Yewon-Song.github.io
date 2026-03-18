@@ -115,12 +115,16 @@
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: 300px 1fr;
+      grid-template-columns: 1fr 300px; 
       min-height: 100vh;
     }
 
+
     /* ══════════════════════════════════
        SIDEBAR
+    ══════════════════════════════════ */
+    /* ══════════════════════════════════
+   SIDEBAR
     ══════════════════════════════════ */
     .sidebar {
       position: sticky;
@@ -130,12 +134,16 @@
       background: var(--glass-bg);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border-right: 1px solid var(--glass-border);
+
+      border-right: none; /* ✅ 기존 right border 제거 */
+      border-left: 1px solid var(--glass-border); /* ✅ 왼쪽 경계선으로 변경 */
+
       display: flex;
       flex-direction: column;
       padding: 2.5rem 2rem;
       z-index: 10;
     }
+
     .sidebar::-webkit-scrollbar { width: 0; }
 
     /* top mark */
@@ -163,8 +171,8 @@
     /* avatar */
     .avatar-ring {
       position: relative;
-      width: 92px;
-      height: 92px;
+      width: 130px;
+      height: 130px;
       margin-bottom: 1.5rem;
     }
     .avatar-ring::before {
@@ -201,8 +209,8 @@
     .avatar {
       position: relative;
       z-index: 1;
-      width: 92px;
-      height: 92px;
+      width: 130px;
+      height: 130px;
       border-radius: 50%;
       background: var(--bg2);
       border: 3px solid var(--bg2);
