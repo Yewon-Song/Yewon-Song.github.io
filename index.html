@@ -862,36 +862,27 @@
     /* visitor stats */
     .visitor-stats {
       margin-top: 3rem;
-      padding: 1.2rem 1.5rem;
+      padding: 1.5rem;
       background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: var(--r2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .visitor-stats .stat-title {
       font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--text2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .visitor-stats .stat-item {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .visitor-stats .stat-icon {
-      font-size: 0.9rem;
-    }
-    .visitor-stats .stat-label {
+      font-size: 0.65rem;
       color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
-    .visitor-stats .stat-value {
-      color: var(--text);
-      font-weight: 500;
+    .visitor-stats a {
+      line-height: 0;
     }
-    .visitor-stats .flag-emoji {
-      font-size: 1.1rem;
+    .visitor-stats img {
+      border-radius: var(--r);
     }
 
     /* footer */
@@ -1193,18 +1184,12 @@
       </div>
     </section>
 
-    <div class="visitor-stats" id="visitor-stats">
-      <div class="stat-item">
-        <span class="stat-icon">👁</span>
-        <span class="stat-label">Total visits</span>
-        <span class="stat-value" id="visit-count">—</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-icon">📍</span>
-        <span class="stat-label">Your location</span>
-        <span class="flag-emoji" id="visitor-flag"></span>
-        <span class="stat-value" id="visitor-country">—</span>
-      </div>
+    <div class="visitor-stats">
+      <span class="stat-title">Visitors</span>
+      <!-- TODO: Replace with your Flag Counter embed code from https://www.flagcounter.me/ -->
+      <a href="https://www.flagcounter.me/details/dcS">
+        <img src="https://www.flagcounter.me/count2/dcS/bg_FFFFFF/txt_1A1916/border_E0DCD4/columns_4/maxflags_20/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0">
+      </a>
     </div>
 
     <footer>
@@ -1257,36 +1242,6 @@
     links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
   }, { passive: true });
 
-  /* visitor stats */
-  (async function() {
-    // Visit counter using CountAPI alternative (localStorage + API)
-    try {
-      const res = await fetch('https://api.countapi.xyz/hit/yewon-song.github.io/visits');
-      const data = await res.json();
-      document.getElementById('visit-count').textContent = data.value.toLocaleString();
-    } catch {
-      // Fallback: simple localStorage counter
-      let count = parseInt(localStorage.getItem('visit-count') || '0', 10) + 1;
-      localStorage.setItem('visit-count', count);
-      document.getElementById('visit-count').textContent = count.toLocaleString();
-    }
-
-    // Country detection via free IP geolocation
-    try {
-      const geo = await fetch('https://ipapi.co/json/');
-      const info = await geo.json();
-      const country = info.country_name || 'Unknown';
-      const code = (info.country_code || '').toUpperCase();
-      // Convert country code to flag emoji
-      if (code.length === 2) {
-        const flag = String.fromCodePoint(...[...code].map(c => 0x1F1E6 + c.charCodeAt(0) - 65));
-        document.getElementById('visitor-flag').textContent = flag;
-      }
-      document.getElementById('visitor-country').textContent = country;
-    } catch {
-      document.getElementById('visitor-country').textContent = 'Unknown';
-    }
-  })();
 </script>
 </body>
 </html>
