@@ -859,6 +859,41 @@
     }
     .misc-body a:hover { background-size: 100% 1px; }
 
+    /* visitor stats */
+    .visitor-stats {
+      margin-top: 3rem;
+      padding: 1.2rem 1.5rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r2);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .visitor-stats .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .visitor-stats .stat-icon {
+      font-size: 0.9rem;
+    }
+    .visitor-stats .stat-label {
+      color: var(--muted);
+    }
+    .visitor-stats .stat-value {
+      color: var(--text);
+      font-weight: 500;
+    }
+    .visitor-stats .flag-emoji {
+      font-size: 1.1rem;
+    }
+
     /* footer */
     footer {
       padding-top: 2rem;
@@ -1158,6 +1193,20 @@
       </div>
     </section>
 
+    <div class="visitor-stats" id="visitor-stats">
+      <div class="stat-item">
+        <span class="stat-icon">👁</span>
+        <span class="stat-label">Total visits</span>
+        <span class="stat-value" id="visit-count">—</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-icon">📍</span>
+        <span class="stat-label">Your location</span>
+        <span class="flag-emoji" id="visitor-flag"></span>
+        <span class="stat-value" id="visitor-country">—</span>
+      </div>
+    </div>
+
     <footer>
       <span>&copy; 2026 Yewon Song</span>
       <span>Built with HTML · GitHub Pages</span>
@@ -1207,6 +1256,37 @@
     const cur = secs.reduce((a, s) => window.scrollY >= s.offsetTop - 160 ? s.id : a, secs[0].id);
     links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
   }, { passive: true });
+
+  /* visitor stats */
+  (async function() {
+    // Visit counter using CountAPI alternative (localStorage + API)
+    try {
+      const res = await fetch('https://api.countapi.xyz/hit/yewon-song.github.io/visits');
+      const data = await res.json();
+      document.getElementById('visit-count').textContent = data.value.toLocaleString();
+    } catch {
+      // Fallback: simple localStorage counter
+      let count = parseInt(localStorage.getItem('visit-count') || '0', 10) + 1;
+      localStorage.setItem('visit-count', count);
+      document.getElementById('visit-count').textContent = count.toLocaleString();
+    }
+
+    // Country detection via free IP geolocation
+    try {
+      const geo = await fetch('https://ipapi.co/json/');
+      const info = await geo.json();
+      const country = info.country_name || 'Unknown';
+      const code = (info.country_code || '').toUpperCase();
+      // Convert country code to flag emoji
+      if (code.length === 2) {
+        const flag = String.fromCodePoint(...[...code].map(c => 0x1F1E6 + c.charCodeAt(0) - 65));
+        document.getElementById('visitor-flag').textContent = flag;
+      }
+      document.getElementById('visitor-country').textContent = country;
+    } catch {
+      document.getElementById('visitor-country').textContent = 'Unknown';
+    }
+  })();
 </script>
 </body>
 </html>
