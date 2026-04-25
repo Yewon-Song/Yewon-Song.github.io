@@ -766,7 +766,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      min-height: 110px;
+      min-height: 80px;
     }
     .pub-thumb img {
       width: 100%;
@@ -776,7 +776,7 @@
     }
     .pub-card:hover .pub-thumb img { transform: scale(1.08); }
     .pub-thumb svg { width: 24px; height: 24px; color: var(--muted); opacity: 0.4; }
-    .pub-info { padding: 1.3rem 1.5rem; }
+    .pub-info { padding: 0.9rem 1.3rem; }
     .venue-tag {
       display: inline-block;
       font-family: var(--mono);
@@ -946,19 +946,6 @@
       .misc-photo img { height: 14rem; }
     }
 
-    /* visitor stats */
-    .visitor-stats {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-      gap: 0.4rem;
-      flex-wrap: wrap;
-    }
-    .visitor-stats img {
-      height: 1.4em;
-      opacity: 0.85;
-    }
-
     /* footer */
     footer {
       padding-top: 2rem;
@@ -992,7 +979,7 @@
       .banner-clip { height: 8em; }
       .banner { height: 11em; margin-top: -3em; }
       .pub-card { grid-template-columns: 1fr; }
-      .pub-thumb { width: 100%; height: 120px; }
+      .pub-thumb { width: 100%; height: 90px; }
       .about-grid { grid-template-columns: 1fr 1fr; }
       .exp-card::before, .exp-card::after { display: none; }
       .blob-1 { width: 300px; height: 300px; }
@@ -1313,11 +1300,6 @@
       </div>
     </section>
 
-    <div class="visitor-stats" hidden>
-      <img src="https://visitor-badge.laobi.icu/badge?page_id=yewon-song.github.io&left_color=ebe1cc&right_color=8b5a2b&left_text=visitors" alt="Total visitors">
-      <img id="today-counter" alt="Today's visitors">
-    </div>
-
   </main>
 
 </div>
@@ -1355,30 +1337,6 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.04 });
   document.querySelectorAll('.sec').forEach(el => io.observe(el));
-
-  /* owner-only visitor stats: visit "#owner" once to enable on this browser, "#hide-owner" to disable */
-  (function() {
-    if (location.hash === '#owner') {
-      localStorage.setItem('isOwner', '1');
-      history.replaceState(null, '', location.pathname);
-    } else if (location.hash === '#hide-owner') {
-      localStorage.removeItem('isOwner');
-      history.replaceState(null, '', location.pathname);
-    }
-    if (localStorage.getItem('isOwner') === '1') {
-      const stats = document.querySelector('.visitor-stats');
-      if (stats) stats.hidden = false;
-    }
-  })();
-
-  /* today visitor counter — uses KST date-based page_id so it resets daily at KST midnight */
-  (function() {
-    const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
-    const todayImg = document.getElementById('today-counter');
-    if (todayImg) {
-      todayImg.src = `https://visitor-badge.laobi.icu/badge?page_id=yewon-song.github.io.${today}&left_color=ebe1cc&right_color=c0392b&left_text=today`;
-    }
-  })();
 
   /* active nav */
   const secs = [...document.querySelectorAll('section[id]')];
