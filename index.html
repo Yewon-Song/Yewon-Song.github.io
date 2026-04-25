@@ -163,7 +163,7 @@
 
     main {
       width: 100%;
-      max-width: 45em;
+      max-width: 52em;
       margin: 0 auto;
       padding: 5rem 4rem 7rem;
     }
@@ -760,13 +760,14 @@
     .pub-card[data-hidden="true"] { display: none; }
     .pub-thumb {
       width: 130px;
+      aspect-ratio: 3 / 4;
+      align-self: center;
       background: linear-gradient(135deg, var(--bg2), var(--bg3));
       border-right: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      min-height: 80px;
     }
     .pub-thumb img {
       width: 100%;
@@ -789,6 +790,7 @@
       margin-bottom: 0.5rem;
       font-weight: 500;
       line-height: 1.5;
+      vertical-align: middle;
     }
     .vc { background: linear-gradient(135deg, #a07449, #8b5a2b); }
     .va { background: linear-gradient(135deg, #c0392b, #8b1e1e); }
@@ -805,7 +807,7 @@
       margin-left: 0.4rem;
       font-weight: 500;
       line-height: 1.5;
-      vertical-align: top;
+      vertical-align: middle;
     }
     .cat-int { background: linear-gradient(135deg, #2563eb, #1e3a8a); color: #fff; }
     .cat-dom { background: linear-gradient(135deg, #15803d, #14532d); color: #fff; }
