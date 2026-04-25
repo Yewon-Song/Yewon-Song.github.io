@@ -61,16 +61,19 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 17px; }
+    html { scroll-behavior: smooth; font-size: 16pt; }
     body {
       background: var(--bg);
       color: var(--text);
       font-family: var(--sans);
-      font-size: 17px;
-      line-height: 1.75;
+      font-size: 1em;
+      line-height: 1.75em;
       transition: background 0.5s var(--ease), color 0.4s var(--ease);
       overflow-x: hidden;
     }
+    @media (max-width: 1680px) { html { font-size: 13pt; } }
+    @media (max-width: 1280px) { html { font-size: 11pt; } }
+    @media (max-width: 1024px) { html { font-size: 12pt; } }
 
     /* ─── DECORATIVE BLOBS ─── */
     .bg-decor {
@@ -123,7 +126,7 @@
     /* ─── BANNER ─── */
     .banner {
       width: 100%;
-      height: 22em;
+      height: 19em;
       background-image: url("images/background.jpg");
       background-position: center 70%;
       background-repeat: no-repeat;
@@ -199,7 +202,7 @@
       height: 10em;
       border-radius: 50%;
       background: var(--bg2);
-      border: 3px solid var(--bg2);
+      border: none;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -238,7 +241,7 @@
     .sb-uni {
       font-size: 0.85em;
       font-weight: 500;
-      color: var(--hi2);
+      color: #8b5a2b;
       margin-bottom: 1.4em;
       text-align: center;
     }
@@ -926,7 +929,7 @@
       .sb-nav { flex-direction: row; flex-wrap: wrap; }
       .sb-bottom { margin-top: 1rem; padding-top: 1rem; }
       main { padding: 2rem 1.5rem 4rem; max-width: 100%; }
-      .banner { height: 14em; }
+      .banner { height: 12em; }
       .pub-card { grid-template-columns: 1fr; }
       .pub-thumb { width: 100%; height: 120px; }
       .about-grid { grid-template-columns: 1fr 1fr; }
@@ -987,7 +990,7 @@
       <a href="#news">News <span class="nav-arrow">→</span></a>
       <a href="#publications">Publications <span class="nav-arrow">→</span></a>
       <a href="#experience">Experience <span class="nav-arrow">→</span></a>
-      <a href="#misc">Misc <span class="nav-arrow">→</span></a>
+      <a href="#awards">Awards <span class="nav-arrow">→</span></a>
     </nav>
 
     <div class="sb-rule"></div>
@@ -1183,19 +1186,30 @@
       </div>
     </section>
 
-    <!-- MISC -->
-    <section class="sec" id="misc">
+    <!-- AWARDS -->
+    <section class="sec" id="awards">
       <div class="sec-label">
         <span class="sec-label-num">05</span>
-        <h2 class="sec-label-title">Misc</h2>
+        <h2 class="sec-label-title">Awards</h2>
         <div class="sec-label-line"></div>
       </div>
-      <div class="misc-body">
-        <p><strong>Awards</strong></p>
-        <p>Grand Prize, 2023 International Collegiate EV Autonomous Driving Contest (Ministry of Transportation Research Director's Award)</p>
-        <p>3rd Prize, 2023 KSAE Smart E-mobility Competition</p>
-        <p>3rd Prize, 2022 International Collegiate EV Autonomous Driving Contest</p>
-        <p>1st Prize, 2022 Konkuk Univ AI Worker Hackathon</p>
+      <div class="news-list">
+        <div class="news-item">
+          <span class="news-date">2023</span>
+          <span class="news-body"><em class="pill pill-award">Grand Prize</em> International Collegiate EV Autonomous Driving Contest <em>(Ministry of Transportation Research Director's Award)</em></span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2023</span>
+          <span class="news-body"><em class="pill pill-award">3rd Prize</em> KSAE Smart E-mobility Competition</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2022</span>
+          <span class="news-body"><em class="pill pill-award">3rd Prize</em> International Collegiate EV Autonomous Driving Contest</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2022</span>
+          <span class="news-body"><em class="pill pill-award">1st Prize</em> Konkuk Univ AI Worker Hackathon</span>
+        </div>
       </div>
     </section>
 
