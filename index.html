@@ -1301,7 +1301,7 @@
         <div class="sec-label-line"></div>
       </div>
       <div class="misc-body">
-        <p>Outside of research, I enjoy staying active — hiking, gym, and various sports. I also unwind with jazz music.</p>
+        <p>I enjoy staying active — a lover of hiking, gym, and various sports. I also can't live without a bit of jazz music.</p>
         <div class="misc-gallery">
           <figure class="misc-photo">
             <img src="images/hike.jpg" alt="Hiking">
@@ -1313,7 +1313,7 @@
       </div>
     </section>
 
-    <div class="visitor-stats">
+    <div class="visitor-stats" hidden>
       <img src="https://visitor-badge.laobi.icu/badge?page_id=yewon-song.github.io&left_color=ebe1cc&right_color=8b5a2b&left_text=visitors" alt="Total visitors">
       <img id="today-counter" alt="Today's visitors">
     </div>
@@ -1355,6 +1355,21 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.04 });
   document.querySelectorAll('.sec').forEach(el => io.observe(el));
+
+  /* owner-only visitor stats: visit "#owner" once to enable on this browser, "#hide-owner" to disable */
+  (function() {
+    if (location.hash === '#owner') {
+      localStorage.setItem('isOwner', '1');
+      history.replaceState(null, '', location.pathname);
+    } else if (location.hash === '#hide-owner') {
+      localStorage.removeItem('isOwner');
+      history.replaceState(null, '', location.pathname);
+    }
+    if (localStorage.getItem('isOwner') === '1') {
+      const stats = document.querySelector('.visitor-stats');
+      if (stats) stats.hidden = false;
+    }
+  })();
 
   /* today visitor counter — uses KST date-based page_id so it resets daily at KST midnight */
   (function() {
