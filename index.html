@@ -38,8 +38,8 @@
       --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
       --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.03);
       --shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
-      --glass-bg: rgba(242,240,236,0.75);
-      --glass-border: rgba(255,255,255,0.5);
+      --glass-bg: rgba(232, 214, 178, 0.78);
+      --glass-border: rgba(255, 240, 210, 0.55);
     }
     [data-theme="dark"] {
       --bg:       #0f0f0e;
@@ -56,18 +56,18 @@
       --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
       --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
       --shadow-lg: 0 12px 40px rgba(0,0,0,0.4);
-      --glass-bg: rgba(24,23,21,0.8);
-      --glass-border: rgba(255,255,255,0.06);
+      --glass-bg: rgba(38, 30, 20, 0.85);
+      --glass-border: rgba(255, 220, 180, 0.08);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; font-size: 17px; }
     body {
       background: var(--bg);
       color: var(--text);
       font-family: var(--sans);
-      font-size: 15px;
-      line-height: 1.7;
+      font-size: 17px;
+      line-height: 1.75;
       transition: background 0.5s var(--ease), color 0.4s var(--ease);
       overflow-x: hidden;
     }
@@ -123,9 +123,9 @@
     /* ─── BANNER ─── */
     .banner {
       width: 100%;
-      height: 15em;
+      height: 22em;
       background-image: url("images/background.jpg");
-      background-position: center;
+      background-position: center 70%;
       background-repeat: no-repeat;
       background-size: cover;
       border-bottom: 1px solid var(--border);
@@ -926,7 +926,7 @@
       .sb-nav { flex-direction: row; flex-wrap: wrap; }
       .sb-bottom { margin-top: 1rem; padding-top: 1rem; }
       main { padding: 2rem 1.5rem 4rem; max-width: 100%; }
-      .banner { height: 10em; }
+      .banner { height: 14em; }
       .pub-card { grid-template-columns: 1fr; }
       .pub-thumb { width: 100%; height: 120px; }
       .about-grid { grid-template-columns: 1fr 1fr; }
@@ -967,7 +967,7 @@
   <aside class="sidebar">
     <div class="avatar-ring">
       <div class="avatar">
-        <img src="images/0318.jpg" alt="Profile Photo">
+        <img src="images/0425.jpg" alt="Profile Photo">
       </div>
     </div>
 
