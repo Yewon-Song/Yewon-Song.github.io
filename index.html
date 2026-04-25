@@ -371,10 +371,13 @@
       transform: translateY(-2px);
     }
     .socials a:hover svg { transform: scale(1.15); }
-    .socials a.social-blog svg {
-      width: 1em;
-      height: 1em;
+    .socials a.social-blog img {
+      width: 1.05em;
+      height: 1.05em;
+      object-fit: contain;
+      transition: transform 0.2s var(--ease);
     }
+    .socials a.social-blog:hover img { transform: scale(1.15); }
 
     /* theme + email */
     .sb-bottom { margin-top: auto; padding-top: 1.5em; width: 100%; text-align: center; }
@@ -1025,11 +1028,8 @@
         <a href="https://www.linkedin.com/in/ssongye/" target="_blank" title="LinkedIn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
-        <a href="https://niagarapokpo.tistory.com/" target="_blank" title="Blog" class="social-blog">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0.01 4">
-            <line x1="4" y1="6" x2="20" y2="6"/>
-            <line x1="12" y1="6" x2="12" y2="22"/>
-          </svg>
+        <a href="https://niagarapokpo.tistory.com/" target="_blank" title="Tistory" class="social-blog">
+          <img src="https://www.tistory.com/favicon.ico" alt="Tistory">
         </a>
       </div>
       <button class="theme-toggle" onclick="toggleTheme()">
