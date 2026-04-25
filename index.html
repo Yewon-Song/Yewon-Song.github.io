@@ -371,6 +371,13 @@
       transform: translateY(-2px);
     }
     .socials a:hover svg { transform: scale(1.15); }
+    .socials a.social-blog {
+      font-family: var(--sans);
+      font-size: 0.62em;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
 
     /* theme + email */
     .sb-bottom { margin-top: auto; padding-top: 1.5em; width: 100%; text-align: center; }
@@ -609,6 +616,36 @@
     .cv-link svg, .cv-link span { position: relative; z-index: 1; }
     [data-theme="dark"] .cv-link { background: linear-gradient(135deg, var(--text), #ccc); color: var(--bg); }
     .cv-link svg { width: 13px; height: 13px; }
+    .about-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.2rem;
+      align-items: center;
+    }
+    .about-actions .cv-link { margin-top: 0; }
+    .email-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.4rem;
+      background: var(--bg);
+      color: var(--text2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: all 0.3s var(--ease);
+    }
+    .email-link:hover {
+      border-color: var(--hi);
+      color: var(--hi);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    .email-link svg { width: 13px; height: 13px; }
 
     /* ── NEWS ── */
     .news-list { display: flex; flex-direction: column; }
@@ -884,6 +921,8 @@
       margin-top: 2rem;
       display: flex;
       justify-content: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
     }
     .visitor-stats img {
       height: 1.4em;
@@ -988,11 +1027,8 @@
         <a href="https://www.linkedin.com/in/ssongye/" target="_blank" title="LinkedIn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
-        <a href="https://niagarapokpo.tistory.com/" target="_blank" title="Blog">
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><text x="12" y="16" text-anchor="middle" font-size="8" font-weight="700" font-family="DM Sans, sans-serif">Blog.</text></svg>
-        </a>
+        <a href="https://niagarapokpo.tistory.com/" target="_blank" title="Blog" class="social-blog">Blog.</a>
       </div>
-      <div class="sb-email">yewonsong@hanyang.ac.kr</div>
       <button class="theme-toggle" onclick="toggleTheme()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="t-icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <span id="t-label">Dark mode</span>
@@ -1038,10 +1074,16 @@
       <div class="about-body">
         <p>Hello! I am a first-year M.S. student in <strong>Automotive Engineering</strong> at <strong>Hanyang University</strong>, advised by Prof. <a href="https://ircv.hanyang.ac.kr/team/soonmin-hwang" target="_blank">Soonmin Hwang</a> at <a href="https://ircv.hanyang.ac.kr/" target="_blank">IRCV Lab</a>. My research focuses on <strong>LiDAR semantic segmentation</strong> and <strong>test-time adaptation</strong> for autonomous driving.</p>
         <p>Before Hanyang University, I completed my B.S. in <strong>Electrical and Electronic Engineering</strong> at <strong>Konkuk University</strong> (2020 – 2025). I also gained industry experience as an AI Research Intern at <a href="https://skyautonet.com/en/" target="_blank"><strong>SkyAutoNet</strong></a> and <a href="https://sites.google.com/view/dcvl" target="_blank"><strong>DCVL</strong></a>.</p>
-        <a href="#" class="cv-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Download CV</span>
-        </a>
+        <div class="about-actions">
+          <a href="#" class="cv-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Download CV</span>
+          </a>
+          <a href="mailto:yewonsong@hanyang.ac.kr" class="email-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>yewonsong@hanyang.ac.kr</span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -1195,7 +1237,8 @@
     </section>
 
     <div class="visitor-stats">
-      <img src="https://hits.sh/yewon-song.github.io.svg?style=flat-square&label=visitors&color=8b5a2b&labelColor=ebe1cc" alt="Visitor count">
+      <img src="https://visitor-badge.laobi.icu/badge?page_id=yewon-song.github.io&left_color=ebe1cc&right_color=8b5a2b&left_text=visitors" alt="Total visitors">
+      <img id="today-counter" alt="Today's visitors">
     </div>
 
     <footer>
@@ -1240,16 +1283,32 @@
   }, { threshold: 0.04 });
   document.querySelectorAll('.sec').forEach(el => io.observe(el));
 
+  /* today visitor counter — uses KST date-based page_id so it resets daily at KST midnight */
+  (function() {
+    const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
+    const todayImg = document.getElementById('today-counter');
+    if (todayImg) {
+      todayImg.src = `https://visitor-badge.laobi.icu/badge?page_id=yewon-song.github.io.${today}&left_color=ebe1cc&right_color=c0392b&left_text=today`;
+    }
+  })();
+
   /* active nav */
   const secs = [...document.querySelectorAll('section[id]')];
   const links = [...document.querySelectorAll('.sb-nav a')];
-  window.addEventListener('scroll', () => {
-    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+  const updateActiveNav = () => {
+    const docHeight = Math.max(
+      document.documentElement.scrollHeight,
+      document.body.scrollHeight
+    );
+    const atBottom = window.innerHeight + window.scrollY >= docHeight - 8;
     const cur = atBottom
       ? secs[secs.length - 1].id
       : secs.reduce((a, s) => window.scrollY >= s.offsetTop - 160 ? s.id : a, secs[0].id);
     links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
-  }, { passive: true });
+  };
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  window.addEventListener('resize', updateActiveNav);
+  updateActiveNav();
 
 </script>
 </body>
