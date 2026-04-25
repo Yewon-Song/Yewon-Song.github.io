@@ -915,6 +915,48 @@
       transition: background-size 0.3s var(--ease);
     }
     .misc-body a:hover { background-size: 100% 1px; }
+    .misc-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.4rem;
+    }
+    .misc-photo {
+      margin: 0;
+      border-radius: var(--r2);
+      overflow: hidden;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    }
+    .misc-photo:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .misc-photo img {
+      display: block;
+      width: 100%;
+      height: 18rem;
+      object-fit: cover;
+      transition: transform 0.4s var(--ease);
+    }
+    .misc-photo:hover img { transform: scale(1.04); }
+    .misc-photo figcaption {
+      padding: 0.55rem 0.9rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+    @media (max-width: 1024px) {
+      .misc-gallery { grid-template-columns: 1fr; }
+      .misc-photo img { height: 14rem; }
+    }
 
     /* visitor stats */
     .visitor-stats {
@@ -1271,7 +1313,17 @@
         <div class="sec-label-line"></div>
       </div>
       <div class="misc-body">
-        <p>Outside of research, I enjoy staying active — hiking, gym, and various sports. I also unwind with azz music.</p>
+        <p>Outside of research, I enjoy staying active — hiking, gym, and various sports. I also unwind with jazz music.</p>
+        <div class="misc-gallery">
+          <figure class="misc-photo">
+            <img src="images/hike.jpg" alt="Hiking">
+            <figcaption>Hiking</figcaption>
+          </figure>
+          <figure class="misc-photo">
+            <img src="images/jazz.jpg" alt="Jazz music">
+            <figcaption>Jazz</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
